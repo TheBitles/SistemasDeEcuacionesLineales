@@ -89,12 +89,13 @@ public class SEL {
 			FileWriter file = new FileWriter(path);
 			BufferedWriter buffer = new BufferedWriter(file);
 
-			buffer.write(x.getDimension());
+			buffer.write(String.valueOf(x.getDimension()));
 			for (int i = 0; i < x.getDimension(); i++) {
 				buffer.newLine();
 				buffer.write(String.valueOf(x.getValor(i)));
 			}
 
+			buffer.newLine();
 			buffer.newLine();
 			buffer.write(String.valueOf(this.calcularErrorSolucion()));
 
