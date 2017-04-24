@@ -10,7 +10,7 @@ public class MatrizMath {
 	private int filas;
 	private int columnas;
 	private double valor[][];
-	
+
 	public int getFilas() {
 		return filas;
 	}
@@ -32,37 +32,36 @@ public class MatrizMath {
 		this.columnas = columna;
 		valor = new double[fila][columna];
 	}
-	
+
 	public MatrizMath(String path) {
-		
+
 		try {
 			FileReader file = new FileReader(path);
 			Scanner scan = new Scanner(file);
 			scan.useLocale(Locale.ENGLISH);
-			
+
 			filas = scan.nextInt();
 			columnas = scan.nextInt();
-			
+
 			valor = new double[filas][columnas];
-			
+
 			for (int i = 0; i < filas * columnas; i++) {
 				int fila = scan.nextInt();
 				int columna = scan.nextInt();
 				valor[fila][columna] = scan.nextDouble();
 			}
 			scan.close();
-		} 
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("No se pudo abrir el archivo");
 		}
 	}
-	
+
 	public MatrizMath sumar(MatrizMath matriz) throws MatrizMathException {
-		
+
 		if (this.filas != matriz.filas || this.columnas != matriz.columnas) {
 			throw new MatrizMathException("Las matrices tienen diferentes dimensiones");
 		}
-		
+
 		MatrizMath suma = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -71,13 +70,13 @@ public class MatrizMath {
 		}
 		return suma;
 	}
-	
+
 	public MatrizMath restar(MatrizMath matriz) throws MatrizMathException {
-		
+
 		if (this.filas != matriz.filas || this.columnas != matriz.columnas) {
 			throw new MatrizMathException("Las matrices tienen diferentes dimensiones");
 		}
-		
+
 		MatrizMath resta = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -86,13 +85,13 @@ public class MatrizMath {
 		}
 		return resta;
 	}
-	
+
 	public MatrizMath multiplicar(MatrizMath matriz) throws MatrizMathException {
-		
+
 		if (this.columnas != matriz.columnas) {
 			throw new MatrizMathException("Las dimensiones de las matrices no permiten multiplicarlas");
 		}
-		
+
 		MatrizMath producto = new MatrizMath(matriz.columnas, this.filas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < matriz.columnas; j++) {
@@ -103,24 +102,24 @@ public class MatrizMath {
 		}
 		return producto;
 	}
-	
+
 	public VectorMath multiplicar(VectorMath vector) throws VectorMathException {
-		
+
 		if (this.columnas != vector.getDimension()) {
 			throw new VectorMathException("Las dimensiones no permiten multiplicar");
 		}
-		
+
 		VectorMath producto = new VectorMath(this.filas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
-				producto.setValor(i, producto.getValor(i) + this.valor[i][j] * vector.getValor(j)); 
+				producto.setValor(i, producto.getValor(i) + this.valor[i][j] * vector.getValor(j));
 			}
 		}
 		return producto;
 	}
-	
+
 	public MatrizMath multiplicar(double escalar) {
-		
+
 		MatrizMath producto = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -129,9 +128,9 @@ public class MatrizMath {
 		}
 		return producto;
 	}
-	
+
 	public double norma1() {
-		
+
 		double norma = 0;
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -140,9 +139,9 @@ public class MatrizMath {
 		}
 		return norma;
 	}
-	
+
 	public double norma2() {
-		
+
 		double norma = 0;
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -151,7 +150,7 @@ public class MatrizMath {
 		}
 		return norma;
 	}
-	
+
 	public double normaInfinita() {
 		double norma = Math.abs(this.valor[0][0]);
 		for (int i = 0; i < this.filas; i++) {
@@ -163,10 +162,10 @@ public class MatrizMath {
 		}
 		return norma;
 	}
-	
+
 	@Override
 	protected MatrizMath clone() {
-		
+
 		MatrizMath clon = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
@@ -177,11 +176,11 @@ public class MatrizMath {
 	}
 
 	public boolean equals(MatrizMath matriz) {
-		
+
 		if (this.filas != matriz.filas || this.columnas != matriz.columnas) {
 			return false;
 		}
-		
+
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
 				if (this.valor[i][j] != matriz.valor[i][j]) {
@@ -191,17 +190,17 @@ public class MatrizMath {
 		}
 		return true;
 	}
-	
+
 	public boolean cuadrada() {
 		return filas == columnas;
 	}
-	
+
 	public double determinante() throws MatrizMathException {
-		
+
 		if (!cuadrada()) {
 			throw new MatrizMathException("El determinante solo puede calcularse para matrices cuadradas");
 		}
-		
+
 		MatrizMath matriz = clone();
 		for (int k = 0; k < filas - 1; k++) {
 			for (int i = k + 1; i < filas; i++) {
@@ -210,31 +209,31 @@ public class MatrizMath {
 				}
 			}
 		}
-		
+
 		double det = 1.0;
 		for (int i = 0; i < filas; i++) {
 			det *= matriz.valor[i][i];
 		}
 		return det;
 	}
-	
+
 	public MatrizMath inversa() throws MatrizMathException {
-		
-		if (!cuadrada()){
+
+		if (!cuadrada()) {
 			throw new MatrizMathException("El determinante solo puede calcularse para matrices cuadradas");
 		}
 		if (determinante() == 0) {
 			throw new MatrizMathException("La matriz no tiene inversa ya que su determinante es cero");
 		}
-		
+
 		MatrizMath a = clone();
 		MatrizMath b = new MatrizMath(filas, columnas);
 		MatrizMath c = new MatrizMath(filas, columnas);
-		
+
 		for (int i = 0; i < filas; i++) {
 			b.valor[i][i] = 1.0;
 		}
-		
+
 		for (int k = 0; k < filas - 1; k++) {
 			for (int i = k + 1; i < filas; i++) {
 				for (int s = 0; s < filas; s++) {
@@ -245,7 +244,7 @@ public class MatrizMath {
 				}
 			}
 		}
-		
+
 		for (int s = 0; s < filas; s++) {
 			c.valor[filas - 1][s] = b.valor[filas - 1][s] / a.valor[filas - 1][filas - 1];
 			for (int i = filas - 2; i >= 0; i--) {
@@ -255,18 +254,18 @@ public class MatrizMath {
 				}
 			}
 		}
-		
+
 		return c;
 	}
-	
-	public double errorAlInvertir() {
-		if (!cuadrada()){
+
+	public double errorAlInvertir() throws MatrizMathException {
+		if (!cuadrada()) {
 			throw new MatrizMathException("El determinante solo puede calcularse para matrices cuadradas");
 		}
 		if (determinante() == 0) {
 			throw new MatrizMathException("La matriz no tiene inversa ya que su determinante es cero");
 		}
-		
+
 		MatrizMath inversa = this.inversa();
 		MatrizMath identidadPrima = this.multiplicar(inversa);
 		MatrizMath errores = MatrizMath.identidad(this.filas).restar(identidadPrima);
@@ -280,7 +279,7 @@ public class MatrizMath {
 		}
 		return identidad;
 	}
-	
+
 	public void mostrar() {
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {

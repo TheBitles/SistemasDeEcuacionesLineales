@@ -12,7 +12,7 @@ public class SEL {
 	private MatrizMath a;
 	private VectorMath b;
 	private VectorMath x;
-	
+
 	public MatrizMath getA() {
 		return a;
 	}
@@ -20,7 +20,7 @@ public class SEL {
 	public VectorMath getB() {
 		return b;
 	}
-	
+
 	public VectorMath getX() {
 		return x;
 	}
@@ -30,7 +30,7 @@ public class SEL {
 		this.b = b;
 		this.x = null;
 	}
-	
+
 	public SEL(String path) {
 		try {
 			FileReader file = new FileReader(path);
@@ -53,55 +53,53 @@ public class SEL {
 			}
 
 			scan.close();
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Ha fallado la apertura del archivo de entrada con path: " + path);
 		}
 	}
-	
+
 	public void resolver() {
 		x = a.inversa().multiplicar(b);
 	}
-	
+
 	public double calcularErrorSolucion() throws SELException {
 		if (x == null) {
 			throw new SELException("Aún no se ha resuelto el sistema de ecuaciones lineales");
 		}
-		
+
 		VectorMath bPrima = a.multiplicar(x);
 		VectorMath errores = b.restar(bPrima);
 		return errores.norma2();
 	}
-	
+
 	public void mostrarSolucion() {
 		if (x == null) {
 			throw new SELException("Aún no se ha resuelto el sistema de ecuaciones lineales");
 		}
-		
+
 		x.mostrar();
 	}
-	
+
 	public void escribirSolucionEnArchivo(String path) throws SELException {
 		if (x == null) {
 			throw new SELException("Aún no se ha resuelto el sistema de ecuaciones lineales");
 		}
-		
+
 		try {
 			FileWriter file = new FileWriter(path);
 			BufferedWriter buffer = new BufferedWriter(file);
-			
+
 			buffer.write(x.getDimension());
 			for (int i = 0; i < x.getDimension(); i++) {
 				buffer.newLine();
 				buffer.write(String.valueOf(x.getValor(i)));
 			}
-			
+
 			buffer.newLine();
 			buffer.write(String.valueOf(this.calcularErrorSolucion()));
-			
+
 			buffer.close();
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("Ha fallado la creación del archivo de salida con path: " + path);
 		}
 	}
