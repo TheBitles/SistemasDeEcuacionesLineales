@@ -12,9 +12,9 @@ public class Main {
 		System.out.println("El sistema se levanta de un archivo entrada.in en la raíz del proyecto");
 		System.out.println("La solución se graba en un archivo salida.out en la raíz del proyecto");
 		
-		SEL sel = new SEL("entrada.in");
+		SEL sel = new SEL("sel.in");
 		sel.resolver();
-		sel.escribirSolucionEnArchivo("salida.out");
+		sel.escribirSolucionEnArchivo("solucion.out");
 		
 		System.out.println("Solución del sistema");
 		sel.mostrarSolucion();
