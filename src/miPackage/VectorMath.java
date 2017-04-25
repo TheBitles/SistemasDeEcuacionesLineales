@@ -137,7 +137,7 @@ public class VectorMath {
 	}
 
 	@Override
-	protected VectorMath clone() {
+	public VectorMath clone() {
 
 		VectorMath clon = new VectorMath(this.dimension);
 		for (int i = 0; i < this.dimension; i++) {

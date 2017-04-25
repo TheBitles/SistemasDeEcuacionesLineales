@@ -164,7 +164,7 @@ public class MatrizMath {
 	}
 
 	@Override
-	protected MatrizMath clone() {
+	public MatrizMath clone() {
 
 		MatrizMath clon = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
