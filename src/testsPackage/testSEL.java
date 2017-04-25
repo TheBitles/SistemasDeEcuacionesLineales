@@ -24,11 +24,18 @@ public class testSEL {
 		sel.resolver();
 		sel.calcularErrorSolucion();
 	}
+	
+	@Test
+	public void testMostrarSolucion() {
+		SEL sel = new SEL("test/SEL/01_Ejemplo/entrada/sel.in");
+		sel.resolver();
+		sel.mostrarSolucion();
+	}
 
 	@Test
 	public void testEscribeSolucionEnArchivo() {
 		SEL sel = new SEL("test/SEL/01_Ejemplo/entrada/sel.in");
 		sel.resolver();
-		sel.escribirSolucionEnArchivo("test/SEL/00_Ejemplo/salida/solucion.out");
+		sel.escribirSolucionEnArchivo("test/SEL/01_Ejemplo/salida/solucion.out");
 	}
 }
