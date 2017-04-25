@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SEL {
@@ -35,6 +36,7 @@ public class SEL {
 		try {
 			FileReader file = new FileReader(path);
 			Scanner scan = new Scanner(file);
+			scan.useLocale(Locale.ENGLISH);
 
 			int ecuaciones = scan.nextInt();
 			a = new MatrizMath(ecuaciones, ecuaciones);
