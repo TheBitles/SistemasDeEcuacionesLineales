@@ -95,6 +95,7 @@ public class testMatrizMath {
 		Assert.assertEquals(norma, normaA);
 	}
 	
+	@Test
 	public void testCloneEquals() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 		MatrizMath clon = matrizA.clone();
@@ -102,30 +103,34 @@ public class testMatrizMath {
 		Assert.assertTrue(matrizA.equals(clon));
 	}
 	
+	@Test
 	public void testIdentidad() {
 		MatrizMath identidad = MatrizMath.identidad(3);
 		MatrizMath identidadOrden3 = new MatrizMath("test/MatrizMath/identidadOrden3.in");
 		
-		Assert.assertEquals(identidad, identidadOrden3);
+		Assert.assertTrue(identidad.equals(identidadOrden3));
 	}
 	
+	@Test
 	public void testDeterminante() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 		
 		Double determinante = matrizA.determinante();
 		Double determinanteA = -2.0;
 		
-		Assert.assertEquals(determinante, determinanteA);
+		Assert.assertTrue(determinante.equals(determinanteA));
 	}
 	
+	@Test
 	public void testInversa() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 
 		MatrizMath inversa = matrizA.inversa();
 		MatrizMath inversaA = new MatrizMath("test/MatrizMath/matrizAinversa.in");
-		Assert.assertEquals(inversa, inversaA);
+		Assert.assertTrue(inversa.equals(inversaA));
 	}
 	
+	@Test
 	public void testCalcularErrorAlInvertir() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 		matrizA.errorAlInvertir();
