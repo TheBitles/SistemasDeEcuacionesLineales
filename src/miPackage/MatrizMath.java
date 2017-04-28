@@ -56,7 +56,7 @@ public class MatrizMath {
 		}
 	}
 
-	public MatrizMath sumar(MatrizMath matriz) throws MatrizMathException {
+	private MatrizMath sumar(MatrizMath matriz, int signo) throws MatrizMathException {
 
 		if (this.filas != matriz.filas || this.columnas != matriz.columnas) {
 			throw new MatrizMathException("Las matrices tienen diferentes dimensiones");
@@ -65,25 +65,18 @@ public class MatrizMath {
 		MatrizMath suma = new MatrizMath(this.filas, this.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < this.columnas; j++) {
-				suma.valor[i][j] = this.valor[i][j] + matriz.valor[i][j];
+				suma.valor[i][j] = this.valor[i][j] + matriz.valor[i][j] * signo;
 			}
 		}
 		return suma;
 	}
 
+	public MatrizMath sumar(MatrizMath matriz) throws MatrizMathException {
+		return this.sumar(matriz, 1);
+	}
+	
 	public MatrizMath restar(MatrizMath matriz) throws MatrizMathException {
-
-		if (this.filas != matriz.filas || this.columnas != matriz.columnas) {
-			throw new MatrizMathException("Las matrices tienen diferentes dimensiones");
-		}
-
-		MatrizMath resta = new MatrizMath(this.filas, this.columnas);
-		for (int i = 0; i < this.filas; i++) {
-			for (int j = 0; j < this.columnas; j++) {
-				resta.valor[i][j] = this.valor[i][j] - matriz.valor[i][j];
-			}
-		}
-		return resta;
+		return this.sumar(matriz, -1);
 	}
 
 	public MatrizMath multiplicar(MatrizMath matriz) throws MatrizMathException {
