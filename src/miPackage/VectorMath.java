@@ -45,7 +45,7 @@ public class VectorMath {
 		}
 	}
 
-	public VectorMath sumar(VectorMath vector) throws VectorMathException {
+	public VectorMath sumar(VectorMath vector, int signo) throws VectorMathException {
 
 		if (this.dimension != vector.dimension) {
 			throw new VectorMathException("Los vectores tienen diferentes dimensiones");
@@ -53,22 +53,17 @@ public class VectorMath {
 
 		VectorMath suma = new VectorMath(this.dimension);
 		for (int i = 0; i < this.dimension; i++) {
-			suma.valor[i] = this.valor[i] + vector.valor[i];
+			suma.valor[i] = this.valor[i] + vector.valor[i] * signo;
 		}
 		return suma;
 	}
 
+	public VectorMath sumar(VectorMath vector) throws VectorMathException {
+		return this.sumar(vector, 1);
+	}
+	
 	public VectorMath restar(VectorMath vector) throws VectorMathException {
-
-		if (this.dimension != vector.dimension) {
-			throw new VectorMathException("Los vectores tienen diferentes dimensiones");
-		}
-
-		VectorMath resta = new VectorMath(this.dimension);
-		for (int i = 0; i < this.dimension; i++) {
-			resta.valor[i] = this.valor[i] - vector.valor[i];
-		}
-		return resta;
+		return this.sumar(vector, -1);
 	}
 
 	public double multiplicar(VectorMath vector) throws VectorMathException {
