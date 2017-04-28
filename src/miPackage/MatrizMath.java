@@ -88,7 +88,7 @@ public class MatrizMath {
 
 	public MatrizMath multiplicar(MatrizMath matriz) throws MatrizMathException {
 
-		if (this.columnas != matriz.columnas) {
+		if (this.columnas != matriz.filas) {
 			throw new MatrizMathException("Las dimensiones de las matrices no permiten multiplicarlas");
 		}
 
