@@ -10,7 +10,7 @@ public class MatrizMath {
 	private int filas;
 	private int columnas;
 	private double valor[][];
-
+	
 	public int getFilas() {
 		return filas;
 	}
@@ -92,7 +92,7 @@ public class MatrizMath {
 			throw new MatrizMathException("Las dimensiones de las matrices no permiten multiplicarlas");
 		}
 
-		MatrizMath producto = new MatrizMath(matriz.columnas, this.filas);
+		MatrizMath producto = new MatrizMath(this.filas, matriz.columnas);
 		for (int i = 0; i < this.filas; i++) {
 			for (int j = 0; j < matriz.columnas; j++) {
 				for (int k = 0; k < this.columnas; k++) {
