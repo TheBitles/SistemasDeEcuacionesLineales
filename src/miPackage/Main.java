@@ -69,10 +69,11 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
+		generarSELAleatorio(3);
+		borrarSolucionAnterior();
+		
 		Calendar tiempoInicial = new GregorianCalendar();
 
-		//generarSELAleatorio(1000);
-		borrarSolucionAnterior();
 		resolverSistema();
 		
 		Calendar tiempoFinal = new GregorianCalendar();
