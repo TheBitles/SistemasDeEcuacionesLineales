@@ -70,7 +70,8 @@ public class Main {
 		
 		Calendar tiempoInicial = new GregorianCalendar();
 
-		generarSELAleatorio(1000);
+		//generarSELAleatorio(1000);
+		borrarSolucionAnterior();
 		resolverSistema();
 		
 		Calendar tiempoFinal = new GregorianCalendar();
