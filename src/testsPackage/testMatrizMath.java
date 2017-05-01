@@ -1,5 +1,7 @@
 package testsPackage;
 
+import java.util.Random;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,17 +43,32 @@ public class testMatrizMath {
 	}
 
 	@Test
-	public void testMultiplicionMatrices() {
+	public void testMultiplicacionMatrices() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 		MatrizMath matrizB = new MatrizMath("test/MatrizMath/matrizB.in");
+		/*
+		MatrizMath matrizA = new MatrizMath(3, 2);
+		MatrizMath matrizB = new MatrizMath(2, 5);
+		Random myRand = new Random();
+		for (int f = 0; f < 3; f++){
+			for (int c = 0; c < 2; c++){
+				matrizA.setValor(f, c, myRand.nextInt(10));
+			}
+		}
 		
+		for (int f = 0; f < 2; f++){
+			for (int c = 0; c < 5; c++){
+				matrizB.setValor(f, c, myRand.nextInt(10));
+			}
+		}
+		*/
 		MatrizMath producto = matrizA.multiplicar(matrizB);
 		MatrizMath productoAB = new MatrizMath("test/MatrizMath/matrizAxB.in");
 		Assert.assertTrue(producto.equals(productoAB));
 	}
 	
 	@Test
-	public void testMultiplicionPorUnEscalar() {
+	public void testMultiplicacionPorUnEscalar() {
 		MatrizMath matrizA = new MatrizMath("test/MatrizMath/matrizA.in");
 		
 		MatrizMath producto = matrizA.multiplicar(2);
@@ -60,7 +77,7 @@ public class testMatrizMath {
 	}
 	
 	@Test
-	public void testMultiplicionMatrizVector() {
+	public void testMultiplicacionMatrizVector() {
 		MatrizMath identidad = MatrizMath.identidad(6);
 		VectorMath vectorA = new VectorMath("test/VectorMath/vectorA.in");
 		
