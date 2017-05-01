@@ -188,30 +188,26 @@ public class MatrizMath {
 		return filas == columnas;
 	}
 
-	public double determinante() {
+	public double determinante() throws MatrizMathException {
 
-		if (this.filas == 2 && this.columnas == 2)
-			return (this.valor[0][0] * this.valor[1][1]) - (this.valor[1][0] * this.valor[0][1]);
+		if (!cuadrada()) {
+			throw new MatrizMathException("El determinante solo puede calcularse para matrices cuadradas");
+		}
 
-		double det = 0;
-		for (int i = 0; i < this.filas; i++) {
-			MatrizMath nuevaMatriz = new MatrizMath(this.filas - 1, this.columnas - 1);
-			for (int j = 0; j < this.filas; j++) {
-				if (j != i) {
-					for (int k = 1; k < this.filas; k++) {
-						int indice = -1;
-						if (j < i)
-							indice = j;
-						else if (j > i)
-							indice = j - 1;
-						nuevaMatriz.valor[indice][k - 1] = this.valor[j][k];
-					}
+		MatrizMath matriz = clone();
+		for (int k = 0; k < filas - 1; k++) {
+			for (int i = k + 1; i < filas; i++) {
+				for (int j = k + 1; j < filas; j++) {
+					if(matriz.valor[k][k] == 0)
+						return 0;
+					matriz.valor[i][j] -= matriz.valor[i][k] * matriz.valor[k][j] / matriz.valor[k][k];
 				}
 			}
-			if (i % 2 == 0)
-				det += this.valor[i][0] * nuevaMatriz.determinante();
-			else
-				det -= this.valor[i][0] * nuevaMatriz.determinante();
+		}
+
+		double det = 1.0;
+		for (int i = 0; i < filas; i++) {
+			det *= matriz.valor[i][i];
 		}
 		return det;
 	}
