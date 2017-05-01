@@ -188,33 +188,33 @@ public class MatrizMath {
 		return filas == columnas;
 	}
 
-public double determinante() {
-	
-		if (this.filas == 2 && this.columnas == 2)
-			return (this.valor[0][0] * this.valor[1][1]) - (this.valor[1][0] * this.valor[0][1]);
+	public double determinante() {
 		
-		double det = 0;
-		for (int i = 0; i < this.filas; i++) {
-			MatrizMath nuevaMatriz = new MatrizMath(this.filas - 1,this.columnas - 1);
-			for (int j = 0; j < this.filas; j++) {
-				if (j != i) {
-					for (int k = 1; k <this.filas; k++) {
-						int indice = -1;
-						if (j < i)
-							indice = j;
-						else if (j > i)
-							indice = j - 1;
-						nuevaMatriz.valor[indice][k - 1] = this.valor[j][k];
+			if (this.filas == 2 && this.columnas == 2)
+				return (this.valor[0][0] * this.valor[1][1]) - (this.valor[1][0] * this.valor[0][1]);
+			
+			double det = 0;
+			for (int i = 0; i < this.filas; i++) {
+				MatrizMath nuevaMatriz = new MatrizMath(this.filas - 1,this.columnas - 1);
+				for (int j = 0; j < this.filas; j++) {
+					if (j != i) {
+						for (int k = 1; k <this.filas; k++) {
+							int indice = -1;
+							if (j < i)
+								indice = j;
+							else if (j > i)
+								indice = j - 1;
+							nuevaMatriz.valor[indice][k - 1] = this.valor[j][k];
+						}
 					}
 				}
+				if (i % 2 == 0)
+					det += this.valor[i][0] * nuevaMatriz.determinante();
+				else
+					det -= this.valor[i][0] * nuevaMatriz.determinante();
 			}
-			if (i % 2 == 0)
-				det += this.valor[i][0] * nuevaMatriz.determinante();
-			else
-				det -= this.valor[i][0] * nuevaMatriz.determinante();
+			return det;
 		}
-		return det;
-	}
 
 	public MatrizMath inversa() throws MatrizMathException {
 
